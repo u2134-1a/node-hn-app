@@ -1,4 +1,4 @@
-# node-hn-app
+# Overview <!-- omit in toc -->
 
 This project is a simple express app for demonstrating testing and code coverage. The project is configured to use GCP services (Cloud Build, Container Registry, and GKE) to build, deploy and run the application on the cloud.
 
@@ -6,6 +6,17 @@ This project is a simple express app for demonstrating testing and code coverage
 [Supertest](https://github.com/visionmedia/supertest) are used for testing.
 Jest is also used for mocking functions and measuring code coverage.
 Note that this app only focuses on server-side JavaScript testing.
+
+## Table of Contents <!-- omit in toc -->
+
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+- [Running Tests](#running-tests)
+- [Code Coverage Report](#code-coverage-report)
+- [Configure the repo and build settings for GCP](#configure-the-repo-and-build-settings-for-gcp)
+- [Helper scripts to enable GCP functionality](#helper-scripts-to-enable-gcp-functionality)
+- [Containerize the application](#containerize-the-application)
+- [Running the container](#running-the-container)
 
 ## Requirements
 
@@ -40,7 +51,7 @@ The coverage report can be viewed in the demo app:
 ---
 
 ## Configure the repo and build settings for GCP
-- Update the **package.json** and **cloudbuild.yaml** file to have the same parameters
+- Update the **package.json** and **cloudbuild.yaml** (or **cloudbuild-deploy.yaml**) file to have the same parameters
 - Update at least the `PROJECT_ID` value for **package.json** using one of the methods below
    - Go to the console [dashboard page](https://console.cloud.google.com/home) and open the projects drop-down on the top bar to list all your projects
    - Run `gcloud projects list` and copy the project id value for your desired project.
@@ -54,12 +65,12 @@ The coverage report can be viewed in the demo app:
   "COMPUTE_ZONE": "us-central1-a"
 }
 ```
-- Update the default values in the substitution block for **cloudbuild.yaml**
+- Update the default values in the substitution block for **cloudbuild.yaml** and **cloudbuild-deploy.yaml**
 ```yaml
 substitutions:
   _APP_NAME: node-hn-app
-  _CLUSTER_NAME: hn-app-demo
-  _CLUSTER_LOCATION: us-central1-a
+  _CLUSTER_NAME: hn-app-demo # only for the deploy yaml file
+  _CLUSTER_LOCATION: us-central1-a # only for the deploy yaml file
 ```
 
 ## Helper scripts to enable GCP functionality
